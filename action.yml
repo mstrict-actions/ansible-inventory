@@ -1,0 +1,31 @@
+name: Ansible inventory gate
+description:
+  Validate a live Ansible inventory and its expected host count without logging
+  host data.
+author: mstrict-actions
+branding:
+  icon: server
+  color: blue
+inputs:
+  inventory:
+    description: Ansible inventory path.
+    required: true
+  expected-hosts:
+    description: Required number of hosts.
+    required: true
+    default: '0'
+  working-directory:
+    description: Directory containing the Ansible project.
+    required: false
+    default: .
+  ansible-config:
+    description: Optional path to ansible.cfg.
+    required: false
+outputs:
+  host-count:
+    description: Number of discovered hosts.
+  matched:
+    description: Whether the count matches the expected value.
+runs:
+  using: node24
+  main: dist/index.js
